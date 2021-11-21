@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Pizza Ordering System</title>
+</head>
+<body>
+	<h1>Pizza Ordering System</h1>
+	<div>
+		<a th:href="@{/}" style="margin-right: 20px;">Home Page</a> <a th:href="@{/addPizzaOrder}" style="margin-right: 20px;">Order
+			Pizza</a> <a th:href="@{/viewPizzaOrders}">View Your Orders</a>
+	</div>
+	<br>
+	<h2>Order A Pizza</h2>
+	<div>
+		<form
+			style="border: gray; border-width: 1px; border-style: solid; border-radius: 10px; padding: 10px 20px 10px 20px; margin-left: 10px; float: left;"
+			th:action="@{/savePizzaOrder}" th:object="${pizzaOrder}"
+			method="post">
+			<label style="margin-right: 20px;">Pepperoni</label><input
+				style="display: none;" type="text" th:value="Pepperoni"
+				th:name="pizzaName" th:id="pizzaName"> <label
+				style="margin-right: 20px;">$99.0</label><input
+				style="display: none;" type="text" th:value="99.0" th:name="price"
+				th:id="price"> <label>Quantity: </label><select
+				th:field="*{quantity}" style="margin-right: 20px;">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+			</select>
+			<button type="Submit">Place Order</button>
+		</form>
+		<br>
+		<br>
+		<br>
+		<form
+			style="border: gray; border-width: 1px; border-style: solid; border-radius: 10px; padding: 10px 20px 10px 20px; margin-left: 10px; float: left;"
+			th:action="@{/savePizzaOrder}" th:object="${pizzaOrder}"
+			method="post">
+			<label style="margin-right: 20px;">Margherita</label><input
+				style="display: none;" type="text" th:value="Margherita"
+				th:name="pizzaName" th:id="pizzaName"> <label
+				style="margin-right: 20px;">$97.0</label><input
+				style="display: none;" type="text" th:value="97.0" th:name="price"
+				th:id="price"> <label>Quantity: </label><select
+				th:field="*{quantity}" style="margin-right: 20px;">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+			</select>
+			<button type="Submit">Place Order</button>
+		</form>
+		<br>
+		<br>
+		<br>
+		<form
+			style="border: gray; border-width: 1px; border-style: solid; border-radius: 10px; padding: 10px 20px 10px 20px; margin-left: 10px; float: left;"
+			th:action="@{/savePizzaOrder}" th:object="${pizzaOrder}"
+			method="post">
+			<label style="margin-right: 20px;">Mushroom</label><input
+				style="display: none;" type="text" th:value="Mushroom"
+				th:name="pizzaName" th:id="pizzaName"> <label
+				style="margin-right: 20px;">$90.0</label><input
+				style="display: none;" type="text" th:value="90.0" th:name="price"
+				th:id="price"> <label>Quantity: </label><select
+				th:field="*{quantity}" style="margin-right: 20px;">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+			</select>
+			<button type="Submit">Place Order</button>
+		</form>
+		<br>
+		<br>
+		<br>
+		<form
+			style="border: gray; border-width: 1px; border-style: solid; border-radius: 10px; padding: 10px 20px 10px 20px; margin-left: 10px; float: left;"
+			th:action="@{/savePizzaOrder}" th:object="${pizzaOrder}"
+			method="post">
+			<label style="margin-right: 20px;">Seafood</label><input
+				style="display: none;" type="text" th:value="Seafood"
+				th:name="pizzaName" th:id="pizzaName"> <label
+				style="margin-right: 20px;">$119.0</label><input
+				style="display: none;" type="text" th:value="119.0" th:name="price"
+				th:id="price"> <label>Quantity: </label><select
+				th:field="*{quantity}" style="margin-right: 20px;">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+			</select>
+			<button type="Submit">Place Order</button>
+		</form>
+		<br>
+		<br>
+		<br>
+		<form
+			style="border: gray; border-width: 1px; border-style: solid; border-radius: 10px; padding: 10px 20px 10px 20px; margin-left: 10px; float: left;"
+			th:action="@{/savePizzaOrder}" th:object="${pizzaOrder}"
+			method="post">
+			<label style="margin-right: 20px;">Cheese</label><input
+				style="display: none;" type="text" th:value="Cheese"
+				th:name="pizzaName" th:id="pizzaName"> <label
+				style="margin-right: 20px;">$89.0</label><input
+				style="display: none;" type="text" th:value="89.0" th:name="price"
+				th:id="price"> <label>Quantity: </label><select
+				th:field="*{quantity}" style="margin-right: 20px;">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+			</select>
+			<button type="Submit">Place Order</button>
+		</form>
+		<br>
+		<br>
+		<br>
+		<form
+			style="border: gray; border-width: 1px; border-style: solid; border-radius: 10px; padding: 10px 20px 10px 20px; margin-left: 10px; float: left;"
+			th:action="@{/savePizzaOrder}" th:object="${pizzaOrder}"
+			method="post">
+			<label style="margin-right: 20px;">Hawaiian</label><input
+				style="display: none;" type="text" th:value="Hawaiian"
+				th:name="pizzaName" th:id="pizzaName"> <label
+				style="margin-right: 20px;">$111.0</label><input
+				style="display: none;" type="text" th:value="111.0" th:name="price"
+				th:id="price"> <label>Quantity: </label><select
+				th:field="*{quantity}" style="margin-right: 20px;">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+			</select>
+			<button type="Submit">Place Order</button>
+		</form>
+	</div>
+</body>
+</html>
