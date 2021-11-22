@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Pizza Ordering System</title>
+</head>
+<body>
+	<h1>Pizza Ordering System</h1>
+	<div>
+		<a th:href="@{/}" style="margin-right: 20px;">Home Page</a> <a th:href="@{/addPizzaOrder}" style="margin-right: 20px;">Order
+			Pizza</a> <a th:href="@{/viewPizzaOrders}">View Your Orders</a>
+	</div>
+	<br>
+	<h2>Update Your Pizza Order</h2>
+	<form
+		style="border: gray; border-width: 1px; border-style: solid; border-radius: 10px; padding: 10px 20px 10px 20px; margin-left: 10px; float: left;"
+		th:action="@{/{id}updatePizzaOrder(id=${pizzaOrder.pizzaOrderId})}"
+		method="post" th:object=${pizzaOrder}>
+		<label style="margin-right: 20px;" th:text="${pizzaOrder.pizzaName}"></label><input
+			style="display: none;" type="text" th:value="${pizzaOrder.pizzaName}"
+			th:name="pizzaName" th:id="pizzaName"> <label
+			style="margin-right: 20px;" th:text="${'$' + pizzaOrder.price}"></label><input
+			style="display: none;" type="text" th:value="${pizzaOrder.price}"
+			th:name="price" th:id="price"> <label>Quantity: </label><select
+			th:field="*{quantity}" style="margin-right: 20px;">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+			<option value="10">10</option>
+		</select>
+		<button type="Submit">Update Order</button>
+	</form>
+
+</body>
+</html>

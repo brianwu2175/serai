@@ -55,4 +55,10 @@ public class PizzaOrder {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+	
+	@Override
+	public String toString() {
+		return "PizzaOrder [pizzaOrderId=" + pizzaOrderId + ", pizzaName=" + pizzaName + ", price=" + price
+				+ ", quantity=" + quantity + "]";
+	}
 }

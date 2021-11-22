@@ -2,6 +2,8 @@ package com.serai.POS;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +20,11 @@ class POSApplicationTest {
 
 	private PizzaOrder pizzaOrder;
 
-	// Setup a predefined sample pizza order object and add it into database
+	// Clear database and setup a predefined sample pizza order object to add into database
 	@BeforeEach
 	public void setup() {
+		List<PizzaOrder> pizzaOrders = pizzaOrderServiceImpl.getAllPizzaOrders();
+		for (PizzaOrder p : pizzaOrders) {pizzaOrderServiceImpl.deletePizzaOrder(p.getPizzaOrderId());}
 		pizzaOrder = new PizzaOrder();
 		pizzaOrder.setPizzaName("Pepperoni");
 		pizzaOrder.setPrice(99.0);
@@ -28,14 +32,14 @@ class POSApplicationTest {
 		pizzaOrderServiceImpl.addPizzaOrder(pizzaOrder);
 	}
 
-	// Test to test add pizza order method in implementation class
+	// Test add pizza order method in implementation class
 	@Test
 	public void addPizzaOrders_PizzaOrderPersistsIntoDatabase() {
-
+		
 		// Sample pizza to add into database
 		PizzaOrder pizzaOrderSample = new PizzaOrder();
-		pizzaOrderSample.setPizzaName("Mushroom");
-		pizzaOrderSample.setPrice(95.0);
+		pizzaOrderSample.setPizzaName("Seafood");
+		pizzaOrderSample.setPrice(100.0);
 		pizzaOrderSample.setQuantity(1);
 
 		// Call the code under test
@@ -44,11 +48,11 @@ class POSApplicationTest {
 		// Save result in database into a pizza order object
 		PizzaOrder pizzaOrderResult = pizzaOrderServiceImpl.getPizzaOrderById(pizzaOrderSample.getPizzaOrderId());
 
-		// Check if the test is a pass or fail by comparing Id
-		assertEquals(pizzaOrderSample.getPizzaOrderId(), pizzaOrderResult.getPizzaOrderId());
+		// Check if the test is a pass or fail by comparing to string
+		assertEquals(pizzaOrderSample.toString(), pizzaOrderResult.toString());
 	}
 
-	// Test to test update pizza name with update pizza order method in implementation class
+	// Test update pizza name with update pizza order method in implementation class
 	@Test
 	public void updatePizzaName_NewPizzaOrderPersistsIntoDatabase() {
 
@@ -63,7 +67,7 @@ class POSApplicationTest {
 		assertEquals("Salami", pizzaOrderResult.getPizzaName());
 	}
 
-	// Test to test update pizza price with update pizza order method in implementation class
+	// Test update pizza price with update pizza order method in implementation class
 	@Test
 	public void updatePizzaPrice_NewPizzaOrderPersistsIntoDatabase() {
 
@@ -78,7 +82,7 @@ class POSApplicationTest {
 		assertEquals(100.0, pizzaOrderResult.getPrice());
 	}
 	
-	// Test to test update pizza quantity with update pizza order method in implementation class
+	// Test update pizza quantity with update pizza order method in implementation class
 	@Test
 	public void updatePizzaQuantity_NewPizzaOrderPersistsIntoDatabase() {
 
@@ -93,7 +97,7 @@ class POSApplicationTest {
 		assertEquals(5, pizzaOrderResult.getQuantity());
 	}
 
-	// Test to test delete pizza order method in implementation class
+	// Test delete pizza order method in implementation class
 	@Test
 	public void deletePizzaOrders_RemoveRecordsOfPizzaOrder() {
 
@@ -104,12 +108,33 @@ class POSApplicationTest {
 		assertEquals(0, pizzaOrderServiceImpl.getAllPizzaOrders().size());
 	}
 
-	// Test to test get all pizza order method in implementation class
+	// Test get all pizza order method in implementation class
 	@Test
-	public void getAllPizzaOrders_FindsFullListOfPizzaOrders() {
-
+	public void getAllPizzaOrders_ReturnsFullListOfPizzaOrders() {
+		
 		// Check if the test is a pass or fail by comparing number of pizza orders in db
-		assertEquals(2, pizzaOrderServiceImpl.getAllPizzaOrders().size());
+		assertEquals(1, pizzaOrderServiceImpl.getAllPizzaOrders().size());
 	}
-
+	
+	// Test find total price method in implementation class
+	@Test
+	public void findTotalPrice_ReturnsTotalPriceOfPizzaOrders() {
+		
+		// Sample pizza to add into database
+		PizzaOrder pizzaOrderSample = new PizzaOrder();
+		pizzaOrderSample.setPizzaName("Mushroom");
+		pizzaOrderSample.setPrice(95.0);
+		pizzaOrderSample.setQuantity(3);
+		pizzaOrderServiceImpl.addPizzaOrder(pizzaOrderSample);
+		
+		// Calculate total price manually
+		double expectedPrice = pizzaOrder.getPrice()*pizzaOrder.getQuantity() + pizzaOrderSample.getPrice()*pizzaOrderSample.getQuantity();
+		
+		// Retrieve list of pizza orders to use find total price to calculate total price of pizza orders
+		List<PizzaOrder> pizzaOrders = pizzaOrderServiceImpl.getAllPizzaOrders();
+		double totalPrice = pizzaOrderServiceImpl.findTotalPrice(pizzaOrders);
+		
+		// Check if the test is a pass or fail by comparing number of pizza orders in db
+		assertEquals(expectedPrice, totalPrice);
+	}
 }

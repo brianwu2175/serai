@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Pizza Ordering System</title>
+</head>
+<body>
+	<h1>Pizza Ordering System</h1>
+	<div>
+		<a th:href="@{/}" style="margin-right: 20px;">Home Page</a> <a
+			th:href="@{/addPizzaOrder}" style="margin-right: 20px;">Order
+			Pizza</a> <a th:href="@{/viewPizzaOrders}">View Your Orders</a>
+	</div>
+	<br>
+	<h2>View Your Pizza Orders</h2>
+	<div th:if="${pizzaOrders.empty}"
+		style="border: gray; border-width: 1px; border-style: solid; border-radius: 10px; padding: 10px 20px 10px 20px; margin-left: 10px; float: left;">
+		<p>You have not made any orders, please click "Order Pizza" to
+			place your first order.</p>
+	</div>
+	<table th:if="${!pizzaOrders.empty}"
+		style="border: gray; border-width: 1px; border-style: solid; border-radius: 10px; padding: 10px 20px 10px 20px; margin-left: 10px; float: left;">
+		<tr>
+			<th style="padding-right: 60px;">Pizza</th>
+			<th style="padding-right: 40px;">Price</th>
+			<th style="padding-right: 20px;">Quantity</th>
+		</tr>
+
+		<div th:each="pizzaOrder:${pizzaOrders}">
+			<tr>
+				<td><span th:text="${pizzaOrder.pizzaName}"></span></td>
+				<td><span th:text="${'$' + pizzaOrder.price}"></span></td>
+				<td><span th:text="${pizzaOrder.quantity}"></span></td>
+				<td><a style="padding-right: 20px;"
+					th:href="@{updatePizzaOrder(id=${pizzaOrder.pizzaOrderId})}">Update</a>
+					<a th:href="@{deletePizzaOrder(id=${pizzaOrder.pizzaOrderId})}"
+					onclick="if (confirm('Delete This Pizza Order?')) return true">Delete</a></td>
+			</tr>
+		</div>
+	</table>
+	<div th:if="${!pizzaOrders.empty}"
+		style="border: gray; border-width: 1px; border-style: solid; border-radius: 10px; padding: 10px 20px 10px 20px; margin-left: 10px; float: left;">
+		<span th:text="${'Total Price: $' + totalPrice}"></span>
+	</div>
+
+</body>
+</html>

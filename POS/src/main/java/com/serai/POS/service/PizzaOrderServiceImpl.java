@@ -78,7 +78,7 @@ public class PizzaOrderServiceImpl implements PizzaOrderInterface {
 		// Try-catch statement to catch any errors while persisting new pizza order
 		try {
 
-			logger.info("Attemping to persist pizza order with id:" + pizzaOrder.getPizzaOrderId());
+			logger.info("Attemping to persist new pizza order");
 
 			pizzaOrderRepo.save(pizzaOrder);
 
@@ -133,8 +133,8 @@ public class PizzaOrderServiceImpl implements PizzaOrderInterface {
 		logger.info("Calculating total price for " + pizzaOrders.size() + " pizza orders");
 
 		// For loop to calculate total price of all pizza orders
-		for (int i = 0; i < pizzaOrders.size(); i++) {
-			totalPrice = totalPrice + pizzaOrders.get(i).getPrice() * pizzaOrders.get(i).getQuantity();
+		for (PizzaOrder pizzaOrder : pizzaOrders) {
+			totalPrice = totalPrice + pizzaOrder.getPrice() * pizzaOrder.getQuantity();
 		}
 		
 		logger.info("Calculated total price for " + pizzaOrders.size() + " pizza orders as $" + totalPrice);
